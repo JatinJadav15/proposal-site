@@ -1,6 +1,0 @@
-# create folder and move into it
-mkdir proposal-site
-cd proposal-site
-
-# copy or create files here (you can paste your index.html into this folder)
-# e.g., if you already have a local index.html, move/copy it here.
