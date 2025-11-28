@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* LUXURIOUS COLORS: Deep Purple & Gold */
+            --primary-color: #d4af37; /* Rich Gold */
+            --secondary-color: #ffd700; /* Bright Gold */
+            --accent-color: #ff69b4; /* Hot Pink */
+            --bg-gradient: linear-gradient(135deg, #1a0033, #4a0e4e, #2d1b69, #1a0033);
+            --glass-bg: rgba(74, 14, 78, 0.3); /* Purple-tinted glass */
+            --glow-color: rgba(212, 175, 55, 0.4);
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-gradient);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        h1, h2 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+        }
+
+        /* --- FLOATING PARTICLES --- */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        /* --- ENTRANCE ANIMATION --- */
+        .entrance-anim {
+            opacity: 0;
+            animation: pageEntrance 2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes pageEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(50px);
+                filter: blur(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        /* --- Layout --- */
+        .full-height {
+            min-height: 100vh;
+        }
+
+        .hero-image-col {
+            padding: 0;
+            height: 50vh; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image-col {
+                height: 100vh;
+            }
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1.5s ease-in-out, transform 12s ease;
+            box-shadow: -10px 0 50px rgba(212, 175, 55, 0.3);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .hero-img.zoom-effect {
+            transform: scale(1.15);
+        }
+
+        /* --- Content Styling --- */
+        .content-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 3.5rem;
+            border-radius: 30px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 40px var(--glow-color);
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(212, 175, 55, 0.05),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .headline {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: 
+                0 0 30px var(--glow-color),
+                0 0 60px var(--glow-color),
+                2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtext {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            color: #f0e6ff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Buttons --- */
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: #1a0033;
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-custom:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.6),
+                0 0 60px var(--glow-color);
+        }
+
+        .btn-custom:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 215, 0, 0.2));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .music-btn:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #1a0033;
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+        }
+
+        .music-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* --- Proposal Section (Hidden initially) --- */
+        #proposal-content {
+            display: none;
+        }
+
+        /* Ring pulse animation */
+        @keyframes ringPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2.2rem;
+            }
+            .glass-panel {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="D:\Jatin_DevOps\proposal-site\Dooron Dooron.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="music-btn" id="music-toggle" title="Play Music">
+        <i class="fas fa-play" id="music-icon"></i>
+    </div>
+
+    <div class="container-fluid entrance-anim">
+        <div class="row full-height">
+            
+            <div class="col-md-6 hero-image-col">
+                <img src="her-photo.jpg" alt="Birthday Girl" class="hero-img" id="main-photo">
+            </div>
+
+            <div class="col-md-6 content-col">
+                
+                <div id="birthday-content" class="glass-panel" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500">
+                    <h1 class="headline">Happy Birthday, My Love</h1>
+                    <p class="subtext">
+                        To the one who makes my world brighter every single day. 
+                        Today is about celebrating you, your smile, and the beautiful journey we are on.
+                        <br><br>
+                        But... I have one more small gift for you.
+                    </p>
+                    <button class="btn btn-custom" id="reveal-btn">Open My Surprise</button>
+                </div>
+
+                <div id="proposal-content" class="glass-panel">
+                    <h1 class="headline" style="color: var(--accent-color); text-shadow: 0 0 40px rgba(255, 105, 180, 0.5);">Will You Marry Me?</h1>
+                    <p class="subtext">
+                        I don't want to just celebrate your birthdays.<br>
+                        I want to celebrate every day of my life with you.<br>
+                        You are my best friend, my soulmate, and my forever.
+                        <br><br>
+                        <strong style="color: var(--primary-color); font-size: 1.3rem;">Let's grow old together?</strong>
+                    </p>
+                    <div style="font-size: 3rem; margin-top: 1.5rem; color: var(--primary-color); text-shadow: 0 0 30px var(--glow-color); animation: ringPulse 2s infinite;">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init();
+
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 30;
+            const colors = ['#d4af37', '#ffd700', '#ff69b4'];
+            const shapes = ['●', '✦', '◆', '★'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+
+        // Variables
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const revealBtn = document.getElementById('reveal-btn');
+        const mainPhoto = document.getElementById('main-photo');
+        const birthdayContent = document.getElementById('birthday-content');
+        const proposalContent = document.getElementById('proposal-content');
+
+        // Music Control Logic
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+                musicBtn.style.animation = 'none';
+            } else {
+                music.play();
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // The Proposal Reveal Logic
+        revealBtn.addEventListener('click', () => {
+            // 1. Fade out the Birthday Text
+            birthdayContent.style.opacity = '0';
+            birthdayContent.style.transition = 'opacity 1s ease';
+
+            // 2. Fade out the Image
+            mainPhoto.style.opacity = '0';
+
+            setTimeout(() => {
+                // 3. Hide Birthday Div, Show Proposal Div
+                birthdayContent.style.display = 'none';
+                proposalContent.style.display = 'block';
+                
+                // Add animation class to proposal content
+                proposalContent.setAttribute('data-aos', 'zoom-in');
+                proposalContent.classList.add('aos-animate');
+
+                // 4. Swap the Image Source
+                // If you don't have a second photo, comment out the next line.
+                mainPhoto.src = 'proposal.jpg'; 
+                
+                // 5. Fade Image back in
+                mainPhoto.onload = () => {
+                    mainPhoto.style.opacity = '1';
+                    mainPhoto.classList.add('zoom-effect'); // Slow zoom effect
+                };
+            }, 1000); // Wait 1 second for fade out
+        });
+    </script>
+</body>
+</html>
